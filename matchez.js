@@ -25,7 +25,7 @@ var guitarists = ['0001-jimi.hendrix.jpg', '0002-duane.allman.jpg', '0007-stevie
   '0096-angus.young-AcDc.jpg', '0097-robert.randolph-Randolphs.jpg', '0098-leigh.stephens-BlueCheer.jpg',
   '0099-greg.ginn-BlackFlag.jpg', '0100-kim.thayil-SoundGarden.jpg', 'top.jpg'];
 
-console.log(guitarists[99]);
+//console.log(guitarists[99]);
 var gridSideSize = 4;
 var cards = [];
 for(var index = 0; index < gridSideSize * 2; index++) {
@@ -69,20 +69,37 @@ function createGameGrid() {
   }
 }
 
-var clicks = 0;
+var clicks = [];
+var results = [];
+var player1 = {
+  name: 'Player One',
+  score: 0
+};
+var player2 = {
+  name: 'Player Two',
+  score: 0
+};
+var turn = 0;
 function turnOver(event) {
-  clicks++;
-  //console.log('clicks: '+ clicks);
-  if(clicks > 2) {
+  clicks.push('click');
+  console.log('clicks length: '+ clicks.length +', type: '+ typeof clicks);
+  if((clicks.length > 1) && (clicks.length % 2 === 1)) { // because well, javascript
+    alert("It's next player's turn!");
+    clicks = [];
     return false;
   }
+
   //console.log('event source'+ event.target || event.srcElement);
   var eventSourceImg = event.target || event.srcElement;
   eventSourceImg.src = eventSourceImg.alt; // hack, part 2
+  results.unshift(eventSourceImg.src);
+  if(results[0] === results[1]) {
+    console.log('=== !!! MATCH !!! ===');
+  }
+  //console.log('results array to compare: '+ results.length);
 
   var stres = setTimeout(function() {
     eventSourceImg.src = 'graphics/guitarists/'+ guitarists[99];
-    clicks = 0;}, 3000);
-  //console.log('settimeout result: '+ stres);
-  
+  }, 3000);
 }
+
