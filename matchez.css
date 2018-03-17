@@ -1,11 +1,11 @@
 body {
-  margin-left: 20%;
+  margin-left: 50%;
 }
 
 .card {
   border: 1px solid black;
   float: left;
-  height: 306px;
-  width: 306px;
+  height: 206px;
+  width: 206px;
 }
 
